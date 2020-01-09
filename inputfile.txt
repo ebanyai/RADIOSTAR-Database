@@ -1,0 +1,12 @@
+#input file
+Plot_type: supernova
+Elements: Fe56 Al26 C12
+Axis: 2
+ZAxis: Metalicities
+Metalicities: z1m2 z1m3 z1m4
+Compare: Metalicities
+Rotation: 00 60
+C13_Pocket: T 0
+Mass: 1p3 1p5 2p0 2p5 3p0 4p0 5p0 6p0
+Vel: 0 150 300
+Z: 0 -1 -2 -3
