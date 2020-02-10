@@ -17,4 +17,4 @@ def read_input_file(file_name):
 
 def read_data_file(file_name):
     #TODO: everything :-D
-    return
+    return 
