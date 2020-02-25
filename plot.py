@@ -1,7 +1,7 @@
 #TODO: This one should do the magic, and be as simple as it can.
 
 # 0. import files from the utils folder
-# data_reader.py
+import utils.data_reader as dr
 # data_processer.py
 # data_plotter.py
 
@@ -15,13 +15,19 @@
 # data = read_data(data_file)
 # reference = read_reference(reference_file)
 
+species = dr.read_species_file()
+print(species)
+
+input_dictionary = dr.read_input_file(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt")
+
+files = dr.create_file_list(r"D:\Projects\Python\RadiostarDB\fruityYields",input_dictionary)
+
+d = dr.read_data_file(r"D:\Projects\Python\RadiostarDB\fruityYields",input_dictionary)
 
 # 2. process the data for the plots
 # data_to_plot = process(input,data,reference)
 
-
 # 3. plot the data
 # plot(processed_data,input) 
-
 
 # that's should be all.
