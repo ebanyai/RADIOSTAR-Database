@@ -1,6 +1,6 @@
 #input file
 Plot_type: Nucleosynthesis
-Elements: He4 Al26 C12
+Element: He4 Al26 C12
 Axis: 2
 Metalicities: z1m2 z1m3 z1m4
 Compare: Element

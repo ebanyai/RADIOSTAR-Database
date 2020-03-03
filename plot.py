@@ -1,7 +1,9 @@
+import utils.data_processer as dpr
 #TODO: This one should do the magic, and be as simple as it can.
 
 # 0. import files from the utils folder
-import utils.data_reader as dr
+from utils.data_reader import DataModel 
+import utils.data_plotter as dp
 # data_processer.py
 # data_plotter.py
 
@@ -15,19 +17,22 @@ import utils.data_reader as dr
 # data = read_data(data_file)
 # reference = read_reference(reference_file)
 
-species = dr.read_species_file()
-print(species)
 
-input_dictionary = dr.read_input_file(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt")
+dr = DataModel(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt",r"D:\Projects\Python\RadiostarDB\fruityYields")
 
-files = dr.create_file_list(r"D:\Projects\Python\RadiostarDB\fruityYields",input_dictionary)
+print(dr.species)
+print(dr.input_dictionary)
 
-d = dr.read_data_file(r"D:\Projects\Python\RadiostarDB\fruityYields",input_dictionary)
+data = dr.read_data_file()
+
+
 
 # 2. process the data for the plots
 # data_to_plot = process(input,data,reference)
+dtp = data.iloc[0]
 
+dpr.process(dr)
 # 3. plot the data
 # plot(processed_data,input) 
-
+#dp.plot(dtp)
 # that's should be all.
