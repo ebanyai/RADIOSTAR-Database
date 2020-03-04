@@ -10,6 +10,8 @@ def process(data_reader):
 	#TODO: some magic
     data = data_reader.data
     input_dict = data_reader.input_dictionary
+    xaxis = input_dict["xaxis"][0]
+    
     
     col_list = data.columns.to_list()
     elements = ["yield"]
@@ -32,13 +34,13 @@ def process(data_reader):
         values = data[item].unique().tolist()
         set_items.append(values)
     
-    
-    
-    items_to_compare = [input_dict[c.lower()] for c in input_dict["compare"]]
-    print(items_to_compare)
-    values_to_compare = itertools.product(*items_to_compare)
-    for p in values_to_compare:
-        print(p)
+    parameters_to_compare = input_dict["compare"]
+     
+    #    items_to_compare = [input_dict[c.lower()] for c in parameters_to_compare ]
+    #    print(items_to_compare)
+    #    sets_to_compare = itertools.product(*items_to_compare)
+    #    for p in sets_to_compare:
+    #        print(p)
     
     print(set_items)
     prod = [*itertools.product(*set_items)]
@@ -53,42 +55,42 @@ def process(data_reader):
     for value, name in zip(prod[0],col_list):
          data_set = data_set.loc[data_set[name] == value]
     
-    print(data_set)
+    #print(data_set)
     
+
+    
+    
+    data_grouped_by_comparison = data_set.groupby(parameters_to_compare)
+    
+    x = []
+    y = []
+    legend = []
+    for state, frame in data_grouped_by_comparison:
+        #print(f"First 2 entries for {state!r}")
+        #print("------------------------")
+        #print(frame["yield"], end="\n\n")
+        
+        x.append(frame[xaxis].tolist())
+        y.append(frame["yield"].tolist())
+        legend.append(" ".join(state))
+        
     
     title = ", ".join(["{name}: {value}".format(name=x,value=y) for x, y in zip(col_list,prod[0])])
-    print(title)
-    
-    x = data_set[input_dict["xaxis"][0]].unique().tolist()
-    print(x)
-    
-    
-    y =[]
-    # still no data for y, though the new dataframe layout might be more better for sorting the data with
-    # some group by function
-    
-    
-    """
-    # Set thevalues
-    x = [d for d in data[input_dict["xaxis"]]]
-    y = [y for y in data["data"]["yield"]]
-    label = []
-    
-    print(x)
-    print(y)
-    print(label)
-    
-    plot_model = PlotModel2D()
-    """
-    return
+    #TODO: set up a dict for different xaxis options (e.g. xlabel_dict = {"mass": "Initial Mass [$M_{\odot}$]", "metalicity": "Metalicity"} )
+    xlabel = xaxis
+   
+    return PlotModel2D(x,y,xlabel,legend,title)
 
 class PlotModel2D():
     
-    def __init__(self,x,y,xlabel,legend):
+    def __init__(self,x,y,xlabel,legend,title):
         
         self.x = x
         self.y = y
         self.xlabel = xlabel
         self.ylabel = "Yields [$M_{\odot}$]"
         self.legend = legend
-        self.title = ""
+        self.title = title
+        
+    def Count(self):
+        return len(self.y)

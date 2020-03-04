@@ -31,8 +31,8 @@ data = dr.read_data_file()
 # data_to_plot = process(input,data,reference)
 dtp = data.iloc[0]
 
-dpr.process(dr)
+d = dpr.process(dr)
 # 3. plot the data
 # plot(processed_data,input) 
-#dp.plot(dtp)
+dp.plot(d)
 # that's should be all.

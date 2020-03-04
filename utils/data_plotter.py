@@ -8,13 +8,11 @@ def plot(plot_model):
 
 def plot_ns_2d(plot_model):
     plt.figure()
-    plt.xlabel('Initial Mass [$M_{\odot}$]')
-    plt.ylabel('Yields [$M_{\odot}$]')
     plt.xlabel(plot_model.xlabel)
     plt.ylabel(plot_model.ylabel)
     for i in range(0,plot_model.Count()):
-        plt.plot(x=plot_model.x[i],y=plot_model.y[i],label=plot_model.label[i])
-        plt.scatter(x=plot_model.x[i],y=plot_model.y[i],label=plot_model.label[i])
+        plt.plot(plot_model.x[i],plot_model.y[i],label=plot_model.legend[i])
+        plt.scatter(x=plot_model.x[i],y=plot_model.y[i],label=None)
     ax = plt.gca()
     ax.set_yscale('log')
     plt.tick_params(axis='y', which='minor')
