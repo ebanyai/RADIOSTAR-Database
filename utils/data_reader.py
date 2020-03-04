@@ -9,7 +9,7 @@ class DataModel():
         self.input_dictionary = read_input_file(input_path)
         self.species = read_species_file(species_path);
         self.data_path = data_path
-        self.data = pd.DataFrame(columns=["mass","metalicity","pocket","rotation","element","yield"])
+        self.data = self.read_data_file()
 
     """
     
@@ -39,7 +39,7 @@ class DataModel():
     """
     def read_data_file_ns_fruity_private(self):
         elements = self.input_dictionary["element"]
-        dataset = pd.DataFrame(columns=["mass","metalicity","pocket","rotation","element","yield"])
+        dataset = pd.DataFrame(columns=["mass","metalicity","c13_pocket","rotation","element","yield"])
         column_names = ["element","A","Z","Yield"]
     
         files = self.create_file_list_private()
@@ -118,6 +118,11 @@ def read_input_file(file_name):
     #TODO: check keys    
     input_dictionary["compare"] = [c.lower() for c in input_dictionary["compare"]]
     
+    multiplot = False 
+    if input_dictionary.get("multiplot"):
+        multiplot = True if input_dictionary["multiplot"][0] in ["True","true","yes","y","1"] else False
+                
+    input_dictionary["multiplot"] = multiplot
     
     print("DONE")
     return input_dictionary
