@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 import os
 import re
+import sys
 
 
 class DataModel():
@@ -9,23 +11,25 @@ class DataModel():
         self.input_dictionary = read_input_file(input_path)
         self.species = read_species_file(species_path);
         self.data_path = data_path
+        self.plot_type = self.input_dictionary["plot_type"]
+        self.plot_dimension = self.input_dictionary["axis"]
         self.data = self.read_data_file()
+        
 
     """
     
     """
     def read_data_file(self):
-        plot_type = self.input_dictionary["plot_type"][0].lower() if self.input_dictionary.get("plot_type") else print("Plot_type was not included in the input file.")
-        source_type = self.input_dictionary["data_source_type"][0].lower() if self.input_dictionary.get("data_source_type") else print("Source_type was not included in the input file.")
+        data_source_type = self.input_dictionary["data_source_type"]
         
         print("Checking for suitable data reader...")
-        if (plot_type == "nucleosynthesis"):
-            if (source_type == "fruity"):
+        if (self.plot_type == "nucleosynthesis"):
+            if (data_source_type == "fruity"):
                 self.read_data_file_ns_fruity_private()
             else:
                 print("No implemented method was found.")
-        elif (plot_type == "supernova"):
-            if (source_type == "fruity"):
+        elif (self.plot_type == "supernova"):
+            if (data_source_type == "fruity"):
                 self.read_data_file_sn_furity_private()
             else:
                 print("No implemented method was found.")
@@ -52,16 +56,15 @@ class DataModel():
             
             #TODO: this part should be done with named regex groups (mass/metallicities above 10 will screw it)
             index = file_name[11:24]
-            mass = file_name[12:15]
-            metalicity = file_name[15:19]
+            mass = file_name[12:15].replace("sun","14m3") #this might be wrong
+            metalicity = file_name[16:19].replace("sun","0.014")
             pocket = file_name[20:21]
             rotation = file_name[21:23]
             for e, v in zip(elements,values):
                 dataset.loc[index+e] = [mass,metalicity,pocket,rotation,e,v]
             
-            #Keep the required elements only, and transform the dataframe 
-            
-            dataset
+        dataset["mass"] = dataset["mass"].apply(convert_values)
+        dataset["metalicity"] = dataset["metalicity"].apply(convert_values)
 
         self.data=dataset
         print("DONE")
@@ -115,8 +118,17 @@ def read_input_file(file_name):
             values =  line.split(":")[1].split()
             input_dictionary[key]=values
     
-    #TODO: check keys    
+    #TODO: check keys (I've partly implemented them)
     input_dictionary["compare"] = [c.lower() for c in input_dictionary["compare"]]
+    
+    input_dictionary["plot_type"] = input_dictionary["plot_type"][0].lower() if input_dictionary.get("plot_type") else raise_error("Plot_type")
+    input_dictionary["axis"] = input_dictionary["axis"][0] if input_dictionary.get("axis") else raise_error("Axis")
+    input_dictionary["data_source_type"] = input_dictionary["data_source_type"][0].lower() if input_dictionary.get("data_source_type") else raise_error("Data_source_type")
+    input_dictionary["xaxis"] = input_dictionary["xaxis"][0] if input_dictionary.get("xaxis") else raise_error("Zaxis")
+    if input_dictionary["axis"] == "3":
+        input_dictionary["zaxis"] = input_dictionary["zaxis"][0] if input_dictionary.get("zaxis") else raise_error("Zaxis")
+
+            
     
     multiplot = False 
     if input_dictionary.get("multiplot"):
@@ -139,4 +151,32 @@ def read_species_file(file_name):
     species_dt["Name"] = species_dt["Name"].str.casefold() 
     print("DONE")
     return species_dt
+
+
+"""
+This function should done the 
+"""    
+def convert_values(x):
+    result = np.nan
+    try:         
+        if "p" in x :
+            result = float(x.replace("p","."))        
+        elif "m" in x :
+            result = float(x.split("m")[0])/(10**float(x.split("m")[1]))
+        else:
+            result = float(x)
+    except:
+        raise ValueError("Could not convert value: {x}".format(x=x))
     
+    return result
+
+
+def raise_error(name):
+    """Exception raised for errors in the input.
+    
+    Attributes:
+        expression -- input expression in which the error occurred
+        message -- explanation of the error
+    """
+    message = "{name} is not included in the input file.".format(name=name)
+    sys.exit(message)

@@ -5,7 +5,6 @@ Element: He4 Al26 C12
 Axis: 2
 xaxis: mass
 Metalicity: z1m2 z1m3 z1m4
-Compare: Element metalicity
-Rotation: 00 60
+Compare: Element 
 C13_Pocket: T 0
 multiplot: true
