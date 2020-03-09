@@ -1,6 +1,6 @@
 from utils.data_reader import DataModel 
 import utils.data_plotter as dp
-import utils.data_processer as dpr
+import utils.data_processor as dpr
 
 #NOTE:
 # grab  files' paths from command line ? this would be a really nice addition and 
