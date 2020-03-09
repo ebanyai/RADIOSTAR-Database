@@ -10,19 +10,15 @@ Running this code creates the figure(s). At the moment the code have to be manua
 
 Planned feature(s):
 - Read input file paths from argument. E.g.:
-`plot.py. -i input_file.txt -d data_files_path`
+```plot.py. -i input_file.txt -d data_files_path```
 
 
 
 ## Utils folder
-data_reader.py: 
+It contains the different data processing files (import, process, plot). 
 
-
-*data_processor.py:*
-
-*data_plotter.py:*
-	It contains the different data processing files (import, process, plot). 
-	data_reader.py
+`data_reader.py`
 	
-	
-	data_processer.py
+`data_processer.py`
+
+`data_plotter.py`
