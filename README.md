@@ -9,16 +9,18 @@ The library contains 4 separate codes, one reference file, and examplary input f
 Running this code creates the figure(s). At the moment the code have to be manually edited to set the file paths.
 
 Planned feature(s):
-- Read input file paths from argument. E.g.:
+- Read input file paths from terminal arguments. E.g.:
+
 ```plot.py. -i input_file.txt -d data_files_path```
 
 
 
 ## Utils folder
-It contains the different data processing files (import, process, plot). 
+It contains the different data processing files (import, process, plot). The idea was to separete the code by function so new features/methods can be more easily implemented in the future.
 
-`data_reader.py`
+### data_reader.py
+This file contains the methods for reading the referenc, the input and the data files. New data reading methods can be implemented for different source of yield data.
 	
-`data_processer.py`
+### data_processor.py
 
-`data_plotter.py`
+### data_plotter.py
