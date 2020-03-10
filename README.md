@@ -24,10 +24,10 @@ This file contains the methods for reading the reference, the input and the data
 The reading methods can be invoked (`read_species_file()`, `read_inputfile()`, `read_data_file()` etc.) separateley - e.g. for debugging - or by using the DataModel class which invokes them during initialization.
 
 Suggested improvements:
-- init DataModel class with a more complex method so DataModel could be assigned/initialized without any obligatory arguments and attributes could be assigned later.
+- init DataModel class with a more complex method so `DataModel` could be assigned/initialized without any obligatory arguments and attributes could be assigned later.
 E.g.:
 ```
-def _init(self,input_path=None,data_path=None,species_path=None):
+def __init__(self,input_path=None,data_path=None,species_path=None):
 	self.input_dictionary = read_input_file(input_path) if input_path not None else {}
 	...
 ```
