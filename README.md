@@ -35,6 +35,6 @@ def __init__(self,input_path=None,data_path=None,species_path=None):
 ### data_processor.py
 This file contains methods to prepare the data for plotting. At the moment only nucleosynthesis data processing is implemented. Note: Maybe there is no need for other methods. See the comments in the `data_processor.py` file for details.
 
-It also contains 3 classes. `PlotModel` which is used for plotting alongside with the two PlotDataModel\*. The ´porocess´ function renturns a PlotModel, containing a list of the PlotDataModels. PlotDataModels are storing the data, and plotting parameteres (such as title, x_label etc.).
+It also contains 3 classes. `PlotModel` which is used for plotting alongside with the two PlotDataModel\*. The `porocess` function renturns a PlotModel, containing a list of the PlotDataModels. PlotDataModels are storing the data, and plotting parameteres (such as title, x_label etc.).
 
 ### data_plotter.py
