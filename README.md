@@ -21,16 +21,16 @@ It contains the different data processing files (import, process, plot). The ide
 ### data_reader.py
 This file contains the methods for reading the reference, the input and the data files. New data reading methods can be implemented for different source of yield data. 
 
-The reading methods can be invoked (´read_species_file()´, ´read_inputfile()´, ´read_data_file()´ etc.) separateley - e.g. for debugging - or by using the DataModel class which invokes them during initialization.
+The reading methods can be invoked (`read_species_file()`, `read_inputfile()`, `read_data_file()` etc.) separateley - e.g. for debugging - or by using the DataModel class which invokes them during initialization.
 
 Suggested improvements:
-- init DataModel class with a more complex method so DataModel could be assigned/initialized without any obligatory argument and attributes could be assigned later.
+- init DataModel class with a more complex method so DataModel could be assigned/initialized without any obligatory arguments and attributes could be assigned later.
 E.g.:
-´´´
+```
 def _init(self,input_path=None,data_path=None,species_path=None):
 	self.input_dictionary = read_input_file(input_path) if input_path not None else {}
 	...
-´´´
+```
 	
 ### data_processor.py
 
