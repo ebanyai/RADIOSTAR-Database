@@ -21,7 +21,7 @@ It contains the different data processing files (import, process, plot). The ide
 ### data_reader.py
 This file contains the methods for reading the reference, the input and the data files. New data reading methods can be implemented for different source of yield data. 
 
-The reading methods can be invoked (`read_species_file()`, `read_inputfile()`, `read_data_file()` etc.) separateley - e.g. for debugging - or by using the DataModel class which invokes them during initialization.
+The reading methods can be invoked (`read_species_file()`, `read_input_file()`, `read_data_file()` etc.) separateley - e.g. for easier debugging - or by using the DataModel class which invokes some of them during initialization.
 
 Suggested improvements:
 - init DataModel class with a more complex method so `DataModel` could be assigned/initialized without any obligatory arguments and attributes could be assigned later.
@@ -33,5 +33,8 @@ def __init__(self,input_path=None,data_path=None,species_path=None):
 ```
 	
 ### data_processor.py
+This file contains methods to prepare the data for plotting. At the moment only nucleosynthesis data processing is implemented. Note: Maybe there is no need for other methods. See the comments in the `data_processor.py` file for details.
+
+It also contains 3 classes. `PlotModel` which is used for plotting alongside with the two PlotDataModel\*. The ´porocess´ function renturns a PlotModel, containing a list of the PlotDataModels. PlotDataModels are storing the data, and plotting parameteres (such as title, x_label etc.).
 
 ### data_plotter.py
