@@ -96,7 +96,7 @@ def read_data_file(data_path,input_dictionary):
             print("No implemented method was found.")
     elif (plot_type == "supernova"):
         if (data_source_type == "fruity"):
-            data = read_data_file_sn_furity(data_path,input_dictionary)
+            data = read_data_file_sn_fruity(data_path,input_dictionary)
         else:
             print("No implemented method was found.")
     else:
@@ -131,8 +131,8 @@ def read_data_file_ns_fruity(data_path,input_dictionary):
         m = r.match(file_name)
         
         index = m.group("index")
-        mass = m.group("mass").replace("sun","14m3") #this might be wrong
-        metalicity = m.group("metalicity").replace("sun","0.014")
+        mass = m.group("mass")
+        metalicity = m.group("metalicity")replace('sun','14m3')
         pocket = m.group("pocket")
         rotation = m.group("rotation")
         
@@ -148,16 +148,50 @@ def read_data_file_ns_fruity(data_path,input_dictionary):
     return dataset
 
 
-def read_data_file_sn_furity(data_path,input_dictionary):
+def read_data_file_sn_fruity(data_path,input_dictionary):
     """
     Reads fruity supernova data.
     
     Returns:
         A pandas DataFrame()
     """
+    print('Reading File...')
+    column_names=['Element','13','15','20','25','30','40','60','80','120']
+
+    dataset = pd.DataFrame(columns=["mass","metalicity","rotation","element","yield"])
     
-    print("This data reading method have not been implemented yet.")
-    return None
+    data = pd.read_table(data_path,sep="\s+& ",names=column_names)
+    title_list=[]
+    #create a list of the subtitles in with file with their index
+    for i in range (0,data.shape[0]):
+        if data['Element'].astype(str).str[0][i]=='\\':
+            title_list.append((data['Element'][i],i))
+            print(data['Element'][i])
+    
+
+    rotation = (input_dictionary["rotation"]) if input_dictionary.get("rotation") else ['0','150','300']
+    metalicity = (input_dictionary["metalicity"]) if input_dictionary.get("metalicity") else ['0','-1','-2','-3']
+    mass = (input_dictionary["mass"]) if input_dictionary.get("mass") else ['13', '15', '20', '25', '30', '40', '60', '80', '120']
+    elements = input_dictionary["element"]
+    #I didn't use regex as the subtitles in the file had too many brackets and back slashes
+    #making it a little complex
+    #so i used a nested loos which creates a string using the input values
+    #and looks for the string and its index from title_list #
+    #and slices the dataframe to read the data
+    for i in mass:
+        for j in metalicity:
+            for k in rotation:
+                index='\cutinhead{v=%s km/s - [Fe/H]=%s}' %(k,j)
+                for l in range(len(title_list)):
+                    if title_list[l][0]==index:
+                        sub_data=data[title_list[l][1]+1:title_list[l+1][1]]
+                        sub_data['120']=sub_data['120'].apply(lambda x: float(x.replace("\\",'').replace(' ',''))) #remove the '\\' in the end
+                        sub_data = sub_data.loc[data['Element'].isin(elements)]
+                        values = [e for e in sub_data[i]]
+                        #adding the values in the dataframe
+                        for e, v in zip(elements,values):
+                            dataset.loc[index+i+e] = [i,j,k,e,v]
+    return dataset
 
 def create_file_list(data_path,input_dictionary):
     """
