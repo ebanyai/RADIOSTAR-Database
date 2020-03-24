@@ -4,7 +4,7 @@ and classes related to this process. The process() function can select the
 required method.
 """
 
-
+'''
 def process(data_model):
     """
     This selects the processing function depending on the plot type 
@@ -23,8 +23,8 @@ def process(data_model):
         return process_sn(data_model)
     return
 
-
-def process_ns(data_model):
+'''
+def process(data_model):
     """
     This function processes nucleosynthesis data. Both for 2D and 3D plots.
     
@@ -99,7 +99,7 @@ def process_ns(data_model):
     
     return PlotModel(plot_data_models,dimension)
 
-
+'''
 #TODO: Implement 
 #NOTE: I'm not sure if this function is really necessary. Might depend on the
     # part where the data gets imported. I would suggest the DataFrame to be
@@ -119,7 +119,7 @@ def process_sn(data_model):
     """
     print("Supernova data processing has not been implemented yet.")
     return
-
+'''
 
 #NOTE: it might be better to include this part in the data_plotter.py file.
     # I couldn't decide. feel free to move it, thou don't forget to add
