@@ -2,7 +2,7 @@
 
 A python3 script that plots the Nucleosynthesis Yield data from the FRUITY database available online ([here](http://fruity.oa-teramo.inaf.it/)) and Supernova Yield from ([arxiv.org](https://arxiv.org/abs/1805.09640)). It can be used to plot and compare yield curves for all the available parameters in the FRUITY database.
 
-Future may include:
+Future work may include:
 
 - Adding surface composition support.
 - Adding net and total yields switch.
