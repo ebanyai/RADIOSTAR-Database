@@ -1,0 +1,7 @@
+#input file
+Plot_type: supernova
+Elements: He4 Al26 C12
+Axis: 2
+Compare: Element
+Vel: 0 150 300
+Z: 0 -1 -2 -3

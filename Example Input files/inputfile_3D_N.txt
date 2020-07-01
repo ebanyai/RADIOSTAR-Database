@@ -1,0 +1,7 @@
+#input file
+Plot_type: nucleosynthesis
+Elements: He4 Al26 C12
+Axis: 3
+Rotation: 00 60
+C13_Pocket: T 0
+Mass: 1p3 1p5 2p0 2p5 3p0 4p0 5p0 6p0

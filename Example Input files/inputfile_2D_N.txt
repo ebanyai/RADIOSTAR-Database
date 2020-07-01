@@ -1,0 +1,8 @@
+#input file
+Plot_type: Nucleosynthesis
+Element: He4 Al26 C12
+Axis: 2
+Metalicities: z1m2 z1m3 z1m4
+Compare: Element
+Rotation: 00 60
+C13_Pocket: T 0
