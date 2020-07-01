@@ -12,7 +12,8 @@ import utils.data_processor as dpr
 
 # Getting the data model ready. It includes the species, input_dictionar and 
 # a DataFrame with the imported yield data.
-data_model = DataModel(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt",r"D:\Projects\Python\RadiostarDB\fruityYields")
+#data_model = DataModel(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt",r"D:\Projects\Python\RadiostarDB\fruityYields")
+data_model = DataModel(r"inputfile_2D_N.txt",r"fruityYields")
 
 # Process the data for the plots
 data_to_plot = dpr.process(data_model)

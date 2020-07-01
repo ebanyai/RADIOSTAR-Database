@@ -132,7 +132,7 @@ def read_data_file_ns_fruity(data_path,input_dictionary):
         
         index = m.group("index")
         mass = m.group("mass")
-        metalicity = m.group("metalicity")replace('sun','14m3')
+        metalicity = m.group("metalicity").replace('sun','14m3')
         pocket = m.group("pocket")
         rotation = m.group("rotation")
         

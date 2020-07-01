@@ -48,7 +48,7 @@ def process(data_model):
     # Here the function creates 'sets' depending on the values given in the
     # input file. Compared parameter(s), yield, and xaxis plus zaxis in case of a 3D
     # plot won't be included.
-    set_parameters = data.columns.to_list()
+    set_parameters = data.columns.tolist()
     items_to_remove = ["yield"]
     items_to_remove.extend(comparison_parameters)
     items_to_remove.append(xaxis)
