@@ -91,7 +91,6 @@ def process(data_model):
         zlabel = zaxis
         
         if ( dimension == "2" ):
-            print(yy)
             plot_data_models.append(PlotDataModel2D(xx,yy,xlabel,legend,title))
         else:
             plot_data_models.append(PlotDataModel3D(xx,yy,zz,xlabel,zlabel,legend,title))
