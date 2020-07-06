@@ -4,6 +4,10 @@ A python3 script that plots the Nucleosynthesis Yield data from the FRUITY datab
 
 Future work may include:
 
+Science
+- Analyze the data.
+
+Programming
 - Adding surface composition support.
 - Adding net and total yields switch.
 - Adding monash and snuppat support, or perhaps coming up with a standarized form.
