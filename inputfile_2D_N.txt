@@ -1,12 +1,10 @@
 #input file
-data_source_type: fruity
 Plot_type: Nucleosynthesis
-Element: He4 Al26 C12
+Data_source_type: Fruity
+Element: He4 Al26 C12 O16
 Axis: 2
-xaxis: mass
-zaxis: metalicity
-Metalicity: z1m2 z1m3 z1m4
-Compare: metalicity 
-C13_Pocket: 0 
-Rotation: 00
-multiplot: true
+XAxis: mass
+Metalicities: z1m2 z1m3 z1m4
+Compare: Element
+Rotation: 00 60
+C13_Pocket: T 0
