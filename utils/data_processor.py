@@ -70,17 +70,17 @@ def process(data_model):
         data_grouped_by_comparison = data_set.groupby(comparison_parameters)
     
         # Initialize variables for PlotDataModel2D and PlotDataModel3D
-        x = []
-        y = []
-        z = []
+        xx = []
+        yy = []
+        zz = []
         legend = []
         
         # Itarate through the sets
         for parameters, frame in data_grouped_by_comparison:
-            x.append(frame[xaxis].tolist())
-            y.append(frame["yield"].tolist())
+            xx.append(frame[xaxis].tolist())
+            yy.append(frame["yield"].tolist())
             if (dimension == "3"):
-                z.append(frame[zaxis].tolist())
+                zz.append(frame[zaxis].tolist())
             legend.append(" ".join(str(parameters)))
             
         
@@ -91,9 +91,10 @@ def process(data_model):
         zlabel = zaxis
         
         if ( dimension == "2" ):
-            plot_data_models.append(PlotDataModel2D(x,y,xlabel,legend,title))
+            print(yy)
+            plot_data_models.append(PlotDataModel2D(xx,yy,xlabel,legend,title))
         else:
-            plot_data_models.append(PlotDataModel3D(x,y,z,xlabel,zlabel,legend,title))
+            plot_data_models.append(PlotDataModel3D(xx,yy,zz,xlabel,zlabel,legend,title))
         
         if not multiplot: break
     
