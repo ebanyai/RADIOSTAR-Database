@@ -1,6 +1,6 @@
 """
-The data_plotter.py takes care of the plotting.  The plot() function selects 
-the plotting method (2D or 3D) and plots the figure(s) accordingly. Though 
+The data_plotter.py takes care of the plotting.  The plot() function selects
+the plotting method (2D or 3D) and plots the figure(s) accordingly. Though
 plot_2d() or plot3d() can be used independently as well.
 """
 
@@ -9,13 +9,13 @@ from mpl_toolkits.mplot3d import Axes3D
 
 def plot(plot_model):
     """
-    This function calls the appropriate plotting function. 
+    This function calls the appropriate plotting function.
     
     Arguments:
         plot_model -- a PlotModel containing the PlotDataModel and dimension information
     """
     
-    print("Started plotting... ",end="")
+    print("Started plotting... ")
     if (plot_model.dimension == "2"):
         for d in plot_model.data:
             plot_2d(d)
@@ -23,7 +23,7 @@ def plot(plot_model):
     elif (plot_model.dimension == "3"):
         for d in plot_model.data:
             plot_3d(d)
-    else: 
+    else:
         print("No suitable plot function was found. :(")
         return
     
@@ -32,7 +32,7 @@ def plot(plot_model):
 
 def plot_2d(plot_data_model):
     """
-    Function for creating 2D plots. 
+    Function for creating 2D plots.
     
     Arguments:
         plot_data_model -- a PlotDataModel2D containing all necessary info
@@ -70,4 +70,4 @@ def plot_3d(plot_data_model):
     ax.set_zlabel(plot_data_model.zlabel)
     ax.set_title(plot_data_model.title)
     plt.legend()
-    return
+    plt.show()

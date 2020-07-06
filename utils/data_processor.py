@@ -1,14 +1,14 @@
 """
-The imported data get processed here, data_processer.py contains the functions 
-and classes related to this process. The process() function can select the 
+The imported data get processed here, data_processer.py contains the functions
+and classes related to this process. The process() function can select the
 required method.
 """
 
 '''
 def process(data_model):
     """
-    This selects the processing function depending on the plot type 
-    (nucleosynthesis, supernova). 
+    This selects the processing function depending on the plot type
+    (nucleosynthesis, supernova).
     
     Arguments:
         data_model -- a DataModel with the data and the input dictionary.
@@ -34,14 +34,14 @@ def process(data_model):
     Returns:
         PlotModel() -- containing the processed data and information for the plotting
     """
-	# For easier referencing
+    # For easier referencing
     data = data_model.data
     input_dict = data_model.input_dictionary
     
     # Initialize values:
     multiplot = input_dict["multiplot"]
-    xaxis = input_dict["xaxis"] 
-    dimension = input_dict["axis"] 
+    xaxis = input_dict["xaxis"]
+    dimension = input_dict["axis"]
     zaxis = input_dict["zaxis"] if dimension == "3" else "-"
     comparison_parameters = input_dict["compare"]
     
@@ -60,8 +60,8 @@ def process(data_model):
     # Init a list fo the PlotDataModels
     plot_data_models = []
     
-    # Group the data in to sets depending on the parameters in the 
-    # set_parameters variable. 
+    # Group the data in to sets depending on the parameters in the
+    # set_parameters variable.
     data_sets = data.groupby(set_parameters)
     
     for set_values, data_set in data_sets:
@@ -76,7 +76,7 @@ def process(data_model):
         legend = []
         
         # Itarate through the sets
-        for parameters, frame in data_grouped_by_comparison:            
+        for parameters, frame in data_grouped_by_comparison:
             x.append(frame[xaxis].tolist())
             y.append(frame["yield"].tolist())
             if (dimension == "3"):
@@ -100,7 +100,7 @@ def process(data_model):
     return PlotModel(plot_data_models,dimension)
 
 '''
-#TODO: Implement 
+#TODO: Implement
 #NOTE: I'm not sure if this function is really necessary. Might depend on the
     # part where the data gets imported. I would suggest the DataFrame to be
     # similar to the one used for the supernova data if possible. Then process_sn()
@@ -144,7 +144,7 @@ class PlotModel():
 
 class PlotDataModel2D():
     """
-    This class contains the required data and information for a 2D plot. 
+    This class contains the required data and information for a 2D plot.
     
     Attributes:
         x -- x values
@@ -154,7 +154,7 @@ class PlotDataModel2D():
         legend -- legend list
         title -- title of the figure
         count -- returns the number of lines
-    """  
+    """
     
     def __init__(self,x,y,xlabel,legend,title):
         self.x = x
@@ -168,7 +168,7 @@ class PlotDataModel2D():
     
 class PlotDataModel3D():
     """
-    This class contains the required data and information for a 3D plot. 
+    This class contains the required data and information for a 3D plot.
     
     Attributes:
         x -- x values

@@ -15,7 +15,7 @@ def read_input_file(file_name):
     Returns:
         A dictionary with the parameters and values for the plot
     """
-    print("Reading input dictionary... ",end="")
+    print("Reading input dictionary... ")
     input_dictionary = {}
     
     with open(file_name, "r")  as input_file:
@@ -39,7 +39,7 @@ def read_input_file(file_name):
         input_dictionary["zaxis"] = input_dictionary["zaxis"][0] if input_dictionary.get("zaxis") else raise_error("Zaxis")
 
     # set the multiplot value to a 'boolean'
-    multiplot = False 
+    multiplot = False
     if input_dictionary.get("multiplot"):
         multiplot = True if input_dictionary["multiplot"][0] in ["True","true","yes","y","1"] else False
     
@@ -51,15 +51,15 @@ def read_input_file(file_name):
 
 def read_species_file(file_name):
     """
-    Reads the species file. 
+    Reads the species file.
     
     Arguments:
-        file_name -- If no specific file was given, it uses the included 
+        file_name -- If no specific file was given, it uses the included
                      species.dat file from the /utils directory.
     Returns:
-        A DataFrame() with the species 
+        A DataFrame() with the species
     """
-    print("Reading species file... ",end="")
+    print("Reading species file... ")
     file_name = file_name if file_name != None else os.path.dirname(os.path.abspath(__file__))+os.sep+"species.dat"
     column_names = ["Name","A","Z","Yield"]
     species_dt = pd.read_table(file_name,sep="\s+",names=column_names)
@@ -81,7 +81,7 @@ def read_data_file(data_path,input_dictionary):
         A pandas DataFrame()
     """
     
-    # For shorter referencing: 
+    # For shorter referencing:
     data_source_type = input_dictionary["data_source_type"]
     plot_type = input_dictionary["plot_type"]
     
@@ -100,7 +100,7 @@ def read_data_file(data_path,input_dictionary):
         else:
             print("No implemented method was found.")
     else:
-        print("No implemented method was found.")   
+        print("No implemented method was found.")
     
     return data
 
@@ -117,7 +117,7 @@ def read_data_file_ns_fruity(data_path,input_dictionary):
     column_names = ["element","A","Z","Yield"]
 
     files = create_file_list(data_path,input_dictionary)
-    print("Reading file(s)... ",end="")
+    print("Reading file(s)... ")
     for file_name in files:
         data = pd.read_table(data_path+os.sep+file_name,sep="\s+",names=column_names,skiprows=1)
         
@@ -195,23 +195,23 @@ def read_data_file_sn_fruity(data_path,input_dictionary):
 
 def create_file_list(data_path,input_dictionary):
     """
-    Returns the file list depending on the given (or not given) values in the input file 
+    Returns the file list depending on the given (or not given) values in the input file
     (mass, metallicity, C13 pocket type, rotation). This function is used for fruity data set.
     
     Returns:
         A 'list' with the file names.
     """
     
-    print("Gather file list depending on the given values in the input dictionary... ",end="")
+    print("Gather file list depending on the given values in the input dictionary... ")
     
     # Gathers all the available file names.
     all_files=os.listdir(data_path)
     
     #NOTE: This part might need some modification. Depending on the fruity naming
-        # conventions: 
-        #   - for mass: m[0-9][p][0-9]|msun --> m[0-9][pm][0-9]|msun or 
+        # conventions:
+        #   - for mass: m[0-9][p][0-9]|msun --> m[0-9][pm][0-9]|msun or
         #     the middle [] extended with other chars
-        #   - for metalicty: z[0-9][m][0-9]|zsun --> z[0-9][pm][0-9]|zsun or 
+        #   - for metalicty: z[0-9][m][0-9]|zsun --> z[0-9][pm][0-9]|zsun or
         #     the midle [] extended with other possible chars
         #   - I don't know if mass/metalicity values can get higher than 9?
         # (by Evelin)
@@ -244,12 +244,12 @@ def convert_values(x):
     Returns:
         Float
     
-    """    
+    """
     
     result = np.nan
-    try:         
+    try:
         if "p" in x :
-            result = float(x.replace("p","."))        
+            result = float(x.replace("p","."))
         elif "m" in x :
             result = float(x.split("m")[0])/(10**float(x.split("m")[1]))
         else:
@@ -262,7 +262,7 @@ def convert_values(x):
 
 def raise_error(name):
     """
-    Stops running the code if the input file has missing parameter(s). 
+    Stops running the code if the input file has missing parameter(s).
     
     Attributes:
         name -- name of the parameter missing from the input file
@@ -272,15 +272,15 @@ def raise_error(name):
 
 class DataModel():
     """
-    This class contains the imported data, species, and input dictionary and 
+    This class contains the imported data, species, and input dictionary and
     methods for importing the data
     
     Attributes:
         input_dictionary -- Dictionary with the input values
         species -- DataFrame with the species data (Name, A, Z, Yield)
         plot_type -- type of the plot (nucleosynthesis, supernova)
-        data -- DataFrame with the imported models data (e.g. metalicity, mass, 
-                element, yield).  
+        data -- DataFrame with the imported models data (e.g. metalicity, mass,
+                element, yield).
         
     """
     
@@ -289,5 +289,4 @@ class DataModel():
         self.species = read_species_file(species_path);
         self.plot_type = self.input_dictionary["plot_type"]
         self.data = read_data_file(data_path,self.input_dictionary)
-        
 
