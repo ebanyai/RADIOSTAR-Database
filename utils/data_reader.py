@@ -75,7 +75,7 @@ def read_species_file(file_name):
 
 def read_data_file(data_path,input_dictionary):
     """
-    Reads fruity nucleosynthesis data.
+    Reads yield data.
     
     Returns:
         A pandas DataFrame()
@@ -95,8 +95,8 @@ def read_data_file(data_path,input_dictionary):
         else:
             print("No implemented method was found.")
     elif (plot_type == "supernova"):
-        if (data_source_type == "fruity"):
-            data = read_data_file_sn_fruity(data_path,input_dictionary)
+        if (data_source_type == "limongi"):
+            data = read_data_file_sn_limongi(data_path,input_dictionary)
         else:
             print("No implemented method was found.")
     else:
@@ -148,9 +148,9 @@ def read_data_file_ns_fruity(data_path,input_dictionary):
     return dataset
 
 
-def read_data_file_sn_fruity(data_path,input_dictionary):
+def read_data_file_sn_limongi(data_path,input_dictionary):
     """
-    Reads fruity supernova data.
+    Reads limongi supernova data.
     
     Returns:
         A pandas DataFrame()

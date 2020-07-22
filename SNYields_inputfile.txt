@@ -1,0 +1,9 @@
+#input file
+Plot_type: supernova
+Data_source_type: limongi
+Element: He4 Al26 C12 O16
+Axis: 2
+XAxis: mass
+Compare: Element
+Vel: 0 150 300
+Z: 0 -1 -2 -3

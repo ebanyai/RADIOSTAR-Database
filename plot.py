@@ -12,28 +12,19 @@ import sys, os
 # -r could be optional
 # (by Evelin)
 
-file_name = input('what file would you like open?')
-with open(file_name)as input:
-    lines = input.readlines()
-    lines_output = ''.join(lines)
-    #print(lines_output)
-    print(file_name)
+if len(sys.argv) < 2:
+    print("Usage: python3 {} yieldName1 [yieldName2 ...]")
+    raise Exception("Wrong usage")
 
-with open(sys.argv[1], 'r') as file:
-    for line in file:
-        print(line)
-        
+yieldDirectory = sys.argv[1]
+inputFile = yieldDirectory + "_inputfile.txt"
+
 # Getting the data model ready. It includes the species, input_dictionar and 
 # a DataFrame with the imported yield data.
-#data_model = DataModel(r"D:\Projects\Python\RadiostarDB\inputfile_2D_N.txt",r"D:\Projects\Python\RadiostarDB\fruityYields")
-data_model = DataModel(r"inputfile.txt", r"fruityYields")
+data_model = DataModel(inputFile, yieldDirectory)
 
 # Process the data for the plots
 data_to_plot = dpr.process(data_model)
 
 # Create figure(s)
 dp.plot(data_to_plot)
-
-
-    
-    
